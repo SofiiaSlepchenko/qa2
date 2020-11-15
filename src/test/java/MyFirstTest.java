@@ -22,6 +22,7 @@ public class MyFirstTest {
 
         int c = a + b;
         return c;
+
     }
 
 }
