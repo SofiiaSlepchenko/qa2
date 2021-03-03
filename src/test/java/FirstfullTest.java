@@ -1,3 +1,4 @@
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -13,20 +14,26 @@ public class FirstfullTest {
 
     private final By ARTICLE_PAGE_TITLE = By.xpath(".//h1[@itemprop = 'headline name']");
 
-    private final Logger
+    private final Logger LOGGER = LogManager.getLogger(FirstfullTest.class);
 
     @Test
     public void titleCommentsCheck() {
+        LOGGER.info("This test is chking titles and comments on TNNEt page");
         System.setProperty("webdriver.chrome.driver", "../chromedriver");
+
+        LOGGER.info("We are opening browser window");
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
+
+        LOGGER.info("Going to TVNET Home page");
         driver.get("http://tvnet.lv");
 
-        //Test Plan
-        //Find article
+
+        LOGGER.info("Taking 3rd article");
+
         WebElement currentArticle = driver.findElements(ARTICLE).get(3);
 
-        //Store title
+        LOGGER.info("Find and store article page");
         String titleToCheck = currentArticle.findElement(ARTICLE_TITLE).getText();
 
         //Store comments count
@@ -39,9 +46,9 @@ public class FirstfullTest {
 
         }
 
-        //Open article
+        //Open 3rd article
         currentArticle.findElement(ARTICLE_TITLE).click();
-        //Check title
+        //Find and check title
         Assertions.assertEquals(titleToCheck, driver.findElement(ARTICLE_PAGE_TITLE).getText(), "Incorrect Title!");
         // Check comments
         //Click on comments
